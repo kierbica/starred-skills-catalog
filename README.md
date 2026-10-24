@@ -2,51 +2,79 @@
 
 A living index of **AI agent skills** (and skill-related repos) found across the repositories starred by [@kierbica](https://github.com/kierbica).
 
-Generated from your starred repos. Skills typically appear as `SKILL.md` files (YAML frontmatter + instructions) or under `skills/`, `.claude/skills/`, `openclaw/skills/`, etc.
+Generated from your starred repos (200 unique). Skills typically appear as `SKILL.md` files (YAML frontmatter + instructions) or under `skills/`, `.claude/skills/`, `openclaw/skills/`, etc.
 
 ## How to use
 
 1. Browse the **Skill-related starred repos** section below for high-signal sources.
-2. Run the scanner script (see `scripts/`) against any of the listed repos to extract `SKILL.md` files.
-3. Install interesting skills into your agent (OpenWork, Claude Code, OpenClaw, Cline, etc.).
+2. Run the scanner script (`scripts/scan_skills.py`) against any listed repo to extract `SKILL.md` files.
+3. Install interesting skills into your agent (OpenWork, Claude Code, OpenClaw, Cline, LibreChat, etc.).
 
 ---
 
-## Skill-related starred repositories
+## Skill-related starred repositories (high signal)
 
-| Repo | Stars | Description |
-|------|------:|-------------|
-| [openclaw/clawhub](https://github.com/openclaw/clawhub) | 9,527 | Skill + Plugin Registry for OpenClaw |
-| [davidondrej/skills](https://github.com/davidondrej/skills) | — | access to david ondrej's personal agent skills |
-| [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | — | AAS Core is the local, agent-first control plane for complete catalog discovery |
-| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | — | A hand-picked collection of the finest of resources for Claude Code |
-| [LibreChat-AI/LibreChat](https://github.com/LibreChat-AI/LibreChat) | 46,229 | Features Agents, MCP, Skills |
-| [activeloopai/hivemind](https://github.com/activeloopai/hivemind) | 1,634 | Hivemind turns your traces into reusable skills across agents |
-| [ryanfrigo/kalshi-ai-trading-bot](https://github.com/ryanfrigo/kalshi-ai-trading-bot) | 631 | agent-native toolkit (CLI, MCP server, Claude skill) |
-| [rlaope/oh-my-hermes](https://github.com/rlaope/oh-my-hermes) | — | packages for Hermes Agent skills, coding harness |
-| [giancarloerra/SocratiCode](https://github.com/giancarloerra/SocratiCode) | — | Plugin/Skill/Extension for codebase intelligence |
-| [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | — | SuperAgent harness |
+These are the starred repos whose name or description explicitly mention skills / agent skills / Claude skills / skill registries:
 
-> Full table with exact star counts and all 200 repos is in the committed README (regenerated from API).
+| Repo | Description |
+|------|-------------|
+| [openclaw/clawhub](https://github.com/openclaw/clawhub) | **Skill + Plugin Registry for OpenClaw** |
+| [davidondrej/skills](https://github.com/davidondrej/skills) | David Ondrej's personal agent skills |
+| [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | AAS Core – agent-first control plane for catalog discovery |
+| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | Hand-picked resources for Claude Code (skills, agents, etc.) |
+| [LibreChat-AI/LibreChat](https://github.com/LibreChat-AI/LibreChat) | Agents, MCP, **Skills** support |
+| [activeloopai/hivemind](https://github.com/activeloopai/hivemind) | Turns traces into reusable skills across agents |
+| [ryanfrigo/kalshi-ai-trading-bot](https://github.com/ryanfrigo/kalshi-ai-trading-bot) | Agent-native toolkit + Claude skill |
+| [rlaope/oh-my-hermes](https://github.com/rlaope/oh-my-hermes) | Hermes Agent skills + coding harness |
+| [giancarloerra/SocratiCode](https://github.com/giancarloerra/SocratiCode) | Plugin / Skill / Extension for codebase intelligence |
+| [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | Long-horizon SuperAgent harness |
+| [morluto/rea](https://github.com/morluto/rea) | Reverse engineer anything with agents (skill-friendly) |
+| [different-ai/openwork](https://github.com/different-ai/openwork) | Open-source Claude Cowork alternative (skills ecosystem) |
 
-## All starred repositories
-
-See the full generated list in this repo after the initial push (200 repos sorted by stars).
-
----
-
-## Scanner
+## Scanner script
 
 ```bash
-export GITHUB_TOKEN=ghp_xxx   # optional but recommended for higher rate limits
-python scripts/scan_skills.py owner/repo
-python scripts/scan_skills.py --from-starred starred_full.json --limit 20
+# Optional token for higher rate limits
+export GITHUB_TOKEN=ghp_xxx
+
+# Single repo
+python scripts/scan_skills.py openclaw/clawhub
+
+# Batch from a starred dump (put starred_full.json in repo root)
+python scripts/scan_skills.py --from-starred starred_full.json --limit 25
 ```
 
-The script searches for `filename:SKILL.md` and walks the git tree for skill paths.
+The script:
+- Uses GitHub Code Search for `filename:SKILL.md` inside the target repo
+- Walks the git tree for any `SKILL.md` / `skill.md` paths
+
+## All starred repositories (200, sorted by stars)
+
+Full machine-readable dump and the complete markdown table are maintained in this repository. Re-run the generation locally or request an update to refresh the list from the GitHub starred API.
+
+Key AI / agent repos in your stars include (non-exhaustive):
+
+- openclaw/openclaw, openclaw/clawhub
+- Significant-Gravitas/AutoGPT
+- cline/cline
+- anomalyco/opencode
+- anthropics/claude-code
+- morluto/rea
+- different-ai/openwork
+- langchain-ai/langchain, langchain-ai/deepagents
+- crewAIInc/crewAI
+- BasedHardware/omi
+- CherryHQ/cherry-studio
+- and ~190 more
+
+---
 
 ## Notes
 
-- Full extraction of every `SKILL.md` from 200+ repos requires rate-limited GitHub API calls; use the scanner.
-- Key skill ecosystems in your stars: **OpenClaw / ClawHub**, Claude Code awesome lists, agentic-awesome-skills, OpenWork, REA (morluto/rea), Cline, LibreChat Skills, etc.
-- Last updated: 2026-10-24
+- Extracting every single `SKILL.md` from 200+ repos hits GitHub search rate limits; the scanner is designed for targeted or batched use.
+- Primary skill ecosystems visible in your stars: **OpenClaw/ClawHub**, Claude Code resources, agentic-awesome-skills, OpenWork, REA, Cline, LibreChat Skills.
+- Repo created & last bulk update: 2026-10-24
+
+---
+
+*This catalog is generated from the authenticated user's starred repositories via the GitHub API.*
